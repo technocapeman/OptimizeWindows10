@@ -8,7 +8,7 @@
 <#
 Modifier: Kapilesh Pennichetty
 About this Program: This program debloats and optimizes Windows 10 to increase performance and reduce RAM and CPU usage. It limits telemetry and disables other non-privacy respecting settings.
-It also optimizes Windows in other ways, such as forced restarts for Windows Update.
+It also optimizes Windows in other ways, such as disabling forced restarts for Windows Update. For best results, run immediately after Windows 10 setup and run after every major feature update.
 
 Credits: https://www.youtube.com/watch?v=PdKMiFKGQuc
 #>
@@ -19,6 +19,11 @@ If (!([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]:
 	Start-Process powershell.exe "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
 	Exit
 }
+
+# Creating a System Restore Point (Credits: https://github.com/ChrisTitusTech/win10script/blob/master/minimal.ps1)
+Write-Output "Creating Restore Point in case something bad happens"
+Enable-ComputerRestore -Drive "C:\"
+Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
 ##########
 # Privacy Settings
@@ -53,8 +58,8 @@ Set-ItemProperty -Path "HKLM:\Software\Microsoft\PolicyManager\default\WiFi\Allo
 # Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\AppHost" -Name "EnableWebContentEvaluation" -Type DWord -Value 0
 
 # Enable SmartScreen Filter
-Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Type String -Value "RequireAdmin"
-Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\AppHost" -Name "EnableWebContentEvaluation"
+# Set-ItemProperty -Path "HKLM:\Software\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Type String -Value "RequireAdmin"
+# Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\AppHost" -Name "EnableWebContentEvaluation"
 
 # Disable Bing Search in Start Menu
 # Write-Host "Disabling Bing Search in Start Menu..."
@@ -326,8 +331,8 @@ Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer
 # Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "Hidden" -Type DWord -Value 2
 
 # Change default Explorer view to "Computer"
-Write-Host "Changing default Explorer view to `"Computer`"..."
-Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
+# Write-Host "Changing default Explorer view to `"Computer`"..."
+# Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo" -Type DWord -Value 1
 
 # Change default Explorer view to "Quick Access"
 # Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "LaunchTo"
@@ -615,8 +620,7 @@ foreach ($service in $services) {
     Get-Service -Name $service | Set-Service -StartupType Disabled
 }
 
-
-#   Description:
+<#   Description:
 # This script optimizes Windows updates by disabling automatic download and
 # seeding updates to other computers.
 #
@@ -645,7 +649,39 @@ Write-Output "Disable 'Updates are available' message"
 takeown /F "$env:WinDIR\System32\MusNotification.exe"
 icacls "$env:WinDIR\System32\MusNotification.exe" /deny "$($EveryOne):(X)"
 takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
+icacls "$env:WinDIR\System32\MusNotificationUx.exe" /deny "$($EveryOne):(X)" #>
+
+#   Description:
+# This script optimizes Windows updates by disabling seeding updates to other computers.
+
+Import-Module -DisableNameChecking $PSScriptRoot\..\lib\New-FolderForced.psm1
+
+<# Write-Output "Disable automatic download and installation of Windows updates"
+New-FolderForced -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" "NoAutoUpdate" 0
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" "AUOptions" 2
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" "ScheduledInstallDay" 0
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU" "ScheduledInstallTime" 3 #>
+
+Write-Output "Disable seeding of updates to other computers via Group Policies"
+New-FolderForced -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization"
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization" "DODownloadMode" 0
+
+<#
+#echo "Disabling automatic driver update"
+#sp "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching" "SearchOrderConfig" 0
+
+$objSID = New-Object System.Security.Principal.SecurityIdentifier "S-1-1-0"
+$EveryOne = $objSID.Translate( [System.Security.Principal.NTAccount]).Value
+
+
+Write-Output "Disable 'Updates are available' message"
+
+takeown /F "$env:WinDIR\System32\MusNotification.exe"
+icacls "$env:WinDIR\System32\MusNotification.exe" /deny "$($EveryOne):(X)"
+takeown /F "$env:WinDIR\System32\MusNotificationUx.exe"
 icacls "$env:WinDIR\System32\MusNotificationUx.exe" /deny "$($EveryOne):(X)"
+#>
 
 
 # This script removes unwanted Apps that come with Windows. If you  do not want
@@ -1014,9 +1050,9 @@ reg delete "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Capabili
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager" /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore" /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
-reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Settings\FindMyDevice" /v "LocationSyncEnabled" /f
+<# reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Settings\FindMyDevice" /v "LocationSyncEnabled" /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Settings\FindMyDevice" /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Settings\FindMyDevice" /v "LocationSyncEnabled" /t REG_DWORD /d "0" /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Settings\FindMyDevice" /v "LocationSyncEnabled" /t REG_DWORD /d "0" /f #>
 reg delete "HKEY_USERS\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /f
 reg add "HKEY_USERS\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics" /f
 reg add "HKEY_USERS\.DEFAULT\SOFTWARE\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /f
