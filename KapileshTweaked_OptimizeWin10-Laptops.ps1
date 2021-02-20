@@ -8,7 +8,7 @@
 <#
 Modifier: Kapilesh Pennichetty
 About this Program: This program debloats and optimizes Windows 10 to increase performance and reduce RAM and CPU usage. It limits telemetry and disables other non-privacy respecting settings.
-It also optimizes Windows in other ways, such as disabling forced restarts for Windows Update. For best results, run immediately after Windows 10 setup and run after every major feature update.
+It also optimizes Windows in other ways, such as disabling forced restarts for Windows Update. For best results, run after every major feature update.
 
 Credits: https://www.youtube.com/watch?v=PdKMiFKGQuc
 #>
