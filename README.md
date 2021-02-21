@@ -13,7 +13,7 @@ To run:
 - Set the execution policy to unrestricted
 - Then, run the script and restart your computer when prompted to do so
 
-Enjoy your speedy Windows 10 experience!
+Any errors that are shown can be ignored. Enjoy your speedy Windows 10 experience!
 
 ## Credits
 
