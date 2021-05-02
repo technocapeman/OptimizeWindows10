@@ -470,7 +470,7 @@ Get-AppxPackage "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.Office.OneNote" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.People" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.SkypeApp" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.Windows.Photos" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.WindowsAlarms" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.WindowsCamera" | Remove-AppxPackage
@@ -478,25 +478,25 @@ Get-AppxPackage "microsoft.windowscommunicationsapps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsMaps" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsPhone" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.XboxApp" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.ZuneMusic" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.ZuneVideo" | Remove-AppxPackage
 # Get-AppxPackage "Microsoft.AppConnector" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.ConnectivityStore" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Office.Sway" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Messaging" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.YourPhone" | Remove-AppxPackage
 Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage
 Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.ScreenSketch" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage
-# Get-AppxPackage "Microsoft.MixedReality.Portal" | Remove-AppxPackage
-# Get-AppBackgroundTask "Microsoft.XboxIdentityProvider" | Remove-AppPackage
+Get-AppxPackage "Microsoft.ScreenSketch" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage
+Get-AppxPackage "Microsoft.MixedReality.Portal" | Remove-AppxPackage
+Get-AppBackgroundTask "Microsoft.XboxIdentityProvider" | Remove-AppPackage
 
 
 # Install default Microsoft applications
@@ -607,9 +607,9 @@ $services = @(
     "WMPNetworkSvc"                            # Windows Media Player Network Sharing Service
     # "wscsvc"                                  # Windows Security Center Service
     # "WSearch"                                 # Windows Search
-    # "XblAuthManager"                           # Xbox Live Auth Manager
-    # "XblGameSave"                              # Xbox Live Game Save Service
-    # "XboxNetApiSvc"                            # Xbox Live Networking Service
+    "XblAuthManager"                           # Xbox Live Auth Manager
+    "XblGameSave"                              # Xbox Live Game Save Service
+    "XboxNetApiSvc"                            # Xbox Live Networking Service
     # "ndu"                                      # Windows Network Data Usage Monitor
     # Services which cannot be disabled
     #"WdNisSvc"
@@ -705,11 +705,11 @@ $apps = @(
     "Microsoft.BingTranslator"
     "Microsoft.BingWeather"
     # "Microsoft.FreshPaint"
-    # "Microsoft.GamingServices"
+    "Microsoft.GamingServices"
     # "Microsoft.Microsoft3DViewer"
     "Microsoft.WindowsFeedbackHub"
     "Microsoft.MicrosoftOfficeHub"
-    # "Microsoft.MixedReality.Portal"
+    "Microsoft.MixedReality.Portal"
     "Microsoft.MicrosoftPowerBIForWindows"
     "Microsoft.MicrosoftSolitaireCollection"
     #"Microsoft.MicrosoftStickyNotes"
@@ -718,7 +718,7 @@ $apps = @(
     # "Microsoft.Office.OneNote"
     "Microsoft.People"
     # "Microsoft.Print3D"
-    # "Microsoft.SkypeApp"
+    "Microsoft.SkypeApp"
     "Microsoft.Wallet"
     # "Microsoft.Windows.Photos"
     # "Microsoft.WindowsAlarms"
@@ -729,26 +729,26 @@ $apps = @(
     # "Microsoft.WindowsPhone"
     # "Microsoft.WindowsSoundRecorder"
     # "Microsoft.WindowsStore"   # can't be re-installed
-    # "Microsoft.Xbox.TCUI"
-    # "Microsoft.XboxApp"
-    # "Microsoft.XboxGameOverlay"
-    # "Microsoft.XboxGamingOverlay"
-    # "Microsoft.XboxSpeechToTextOverlay"
+    "Microsoft.Xbox.TCUI"
+    "Microsoft.XboxApp"
+    "Microsoft.XboxGameOverlay"
+    "Microsoft.XboxGamingOverlay"
+    "Microsoft.XboxSpeechToTextOverlay"
     # "Microsoft.YourPhone"
     # "Microsoft.ZuneMusic"
     # "Microsoft.ZuneVideo"
     "Microsoft.Windows.CloudExperienceHost"
     "Microsoft.Windows.ContentDeliveryManager"
     "Microsoft.Windows.PeopleExperienceHost"
-    # "Microsoft.XboxGameCallableUI"
+    "Microsoft.XboxGameCallableUI"
 
     # Threshold 2 apps
     "Microsoft.CommsPhone"
     # "Microsoft.ConnectivityStore"
-    # "Microsoft.GetHelp"
+    "Microsoft.GetHelp"
     "Microsoft.Getstarted"
     "Microsoft.Messaging"
-    # "Microsoft.Office.Sway"
+    "Microsoft.Office.Sway"
     "Microsoft.OneConnect"
     "Microsoft.WindowsFeedbackHub"
 
@@ -763,9 +763,9 @@ $apps = @(
     # "Microsoft.WindowsReadingList"
 
     # Redstone 5 apps
-    # "Microsoft.MixedReality.Portal"
-    # "Microsoft.ScreenSketch"
-    # "Microsoft.XboxGamingOverlay"
+    "Microsoft.MixedReality.Portal"
+    "Microsoft.ScreenSketch"
+    "Microsoft.XboxGamingOverlay"
     # "Microsoft.YourPhone"
 
     # non-Microsoft
