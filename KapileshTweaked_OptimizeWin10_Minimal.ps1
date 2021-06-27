@@ -490,7 +490,7 @@ Get-AppxPackage "9E2F88E3.Twitter" | Remove-AppxPackage
 Get-AppxPackage "king.com.CandyCrushSodaSaga" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Wallet" | Remove-AppxPackage
-Get-AppxPackage "Microsoft.ScreenSketch" | Remove-AppxPackage
+# Get-AppxPackage "Microsoft.ScreenSketch" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.GetHelp" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.Xbox.TCUI" | Remove-AppxPackage
 Get-AppxPackage "Microsoft.XboxGameOverlay" | Remove-AppxPackage
@@ -764,7 +764,7 @@ $apps = @(
 
     # Redstone 5 apps
     "Microsoft.MixedReality.Portal"
-    "Microsoft.ScreenSketch"
+    # "Microsoft.ScreenSketch"
     "Microsoft.XboxGamingOverlay"
     # "Microsoft.YourPhone"
 
