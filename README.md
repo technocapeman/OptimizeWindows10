@@ -1,5 +1,7 @@
-# OptimizeWindows10
+# THIS REPO HAS BEEN ARCHIVED
+I am archiving this repo in favor of my new debloat script, [windebloater](https://github.com/technocapeman/windebloater). It is a fork of [win10script](https://github.com/ChrisTitusTech/win10script) by @ChrisTitusTech, and it includes a GUI and much more options for setting up a new Windows 10 install.
 
+# OptimizeWindows10
 **WARNING: I DO NOT TAKE RESPONSIBILITY FOR WHAT MAY HAPPEN TO YOUR SYSTEM. THIS IS AT YOUR OWN RISK.**
 
 Out of the box, Windows 10 is an EXTREMELY bloated operating system. Processes such as Cortana and telemetry are known 
